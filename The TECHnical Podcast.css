@@ -20,9 +20,8 @@ html, body {
 
 
 .button1 {
-    margin: auto;
     width:50%;
-    display: block;
+    margin-left: 25%;
     border: none;
     border-radius: 10px;
     color:#000000;
@@ -49,9 +48,8 @@ html, body {
 
 
 .button2 {
-    margin: auto;
     width: 50%;
-    display: block;
+    margin-left: 25%;
     border: none;
     border-radius: 10px;
     color:#000000;
@@ -79,9 +77,8 @@ html, body {
 
 
 .button3 {
-    margin: auto;
     width: 50%;
-    display: block;
+    margin-left: 25%;
     border: none;
     border-radius: 10px;
     color:#000000;
