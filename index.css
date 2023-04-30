@@ -9,7 +9,6 @@ body {
   background-image: url("background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  filter: blur(8px);
 }
 
 h1 {
