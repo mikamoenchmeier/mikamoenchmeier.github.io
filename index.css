@@ -1,14 +1,22 @@
 body {
   margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover
+}
+
+div1 {
+  margin: 0;
   padding-left: 10%;
   padding-right: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-image: url("background.jpg");
+  height: 80vh;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover
 }
 
 h1 {
@@ -73,23 +81,26 @@ li {
   color: #FF0000;
 }
 
-.fa-twitter {
-  color: #1da0f2;
+
+.fa-x-twitter {
+  color: #212F4E;
 }
 
-.fa-twitter:hover,
-.fa-twitter:focus {
-  color: #1da1f2;
+.fa-x-twitter:hover,
+.fa-x-twitter:focus {
+  color: #212F4E  ;
 }
+
 
 .fa-instagram {
-  color: #c13584;
+  color: #ff0b69;
 }
 
 .fa-instagram:hover,
 .fa-instagram:focus {
-  color: #c13584;
+  color: #ff0b69;
 }
+
 
 .fa-github {
   color: #1d1a1a;
@@ -100,6 +111,7 @@ li {
   color: #1d1a1a;
 }
 
+
 .fa-discord {
   color: #8946ed;
 }
@@ -108,6 +120,7 @@ li {
 .fa-discord:focus {
   color: #8946ed;
 }
+
 
 .fa-square-snapchat {
   color: #fffb00;
@@ -118,6 +131,7 @@ li {
   color: #fffc00;
 }
 
+
 .fa-reddit {
   color: #ff4400;
 }
@@ -127,6 +141,7 @@ li {
   color: #ff4500;
 }
 
+
 .fa-linkedin {
   color: #0073b1;
 }
@@ -134,4 +149,65 @@ li {
 .fa-linkedin:hover,
 .fa-linkedin:focus {
   color: #0073b1;
+}
+
+
+.fa-slack {
+  color: #63C1A0;
+}
+
+.fa-slack:hover,
+.fa-slack:focus {
+  color: #63C1A0;
+}
+
+
+.fa-pinterest {
+  color: #E60023;
+}
+
+.fa-pinterestn:hover,
+.fa-pinterest:focus {
+  color: #E60023;
+}
+
+
+
+div2 {
+  margin: auto;
+  width: 100vh;
+  background-color: 000000;
+  padding-left: 10%;
+  padding-right: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 19vh;
+}
+
+button {
+  background-color: #224f12;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 25px;
+  display: flex
+}
+
+h2 {
+  color: #bd8503;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  text-align: center;
+}
+
+img {
+  height: 80px;
+  width: 80px;
+  padding-right: 20px;
+  padding-left: 20px;
 }
