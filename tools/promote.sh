@@ -34,7 +34,11 @@ done
 gh pr checks "$FROM" --watch || { echo "The build failed. Fix it on $FROM, push, and run this again (the pull request stays open)."; exit 1; }
 
 say "Merging"
-gh pr merge "$FROM" --merge
+for i in 1 2 3 4 5 6; do
+  gh pr merge "$FROM" --merge && break
+  [ $i -eq 6 ] && { echo "GitHub still won't merge. Run: gh pr view $FROM --json mergeStateStatus,reviewDecision"; exit 1; }
+  echo "   GitHub isn't ready yet, retrying in 20 seconds…"; sleep 20
+done
 
 if [ "$TARGET" = main ]; then
   say "Tagging $TAG"
