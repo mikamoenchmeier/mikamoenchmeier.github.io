@@ -9,6 +9,8 @@
   // Lets Cloudflare build a preview of every branch before it's merged.
   "previews": {},
   "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
     "logs": {
       "enabled": true,
       "head_sampling_rate": 1,
@@ -16,9 +18,12 @@
       "persist": true
     },
     "traces": {
-      "enabled": false,
+      "enabled": true,
       "head_sampling_rate": 1,
       "persist": true
+    },
+    "issue_detection": {
+      "enabled": true
     }
   }
 }
