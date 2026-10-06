@@ -7,7 +7,7 @@
 <title>Mika Moenchmeier</title>
 <meta name="description" content="Mika Moenchmeier builds things that have to work: a self-landing model rocket with thrust vector control, a self-hosted home server, and more.">
 <meta property="og:title" content="Mika Moenchmeier">
-<meta property="og:description" content="Scroll to fly a rocket from planet to planet, and land on Earth.">
+<meta property="og:description" content="Mika Moenchmeier builds things end to end: a self-landing model rocket, a home server, and this site.">
 <meta property="og:url" content="https://mikamoenchmeier.com/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://mikamoenchmeier.com/og.png">
@@ -17,10 +17,9 @@
 <link rel="canonical" href="https://mikamoenchmeier.com/">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpolygon points='20,2 37.3,12 37.3,32 20,42 2.7,32 2.7,12' fill='%23000' stroke='%23D9A441' stroke-width='4'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap">
+<link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:'Archivo';font-style:normal;font-weight:300 900;font-stretch:62% 125%;font-display:swap;src:url(/fonts/archivo-latin.woff2) format('woff2')}
 :root{--ink:#EDE6D8;--ink-2:#D6CFC1;--muted:#A8A196;--line:#2A2519;--line-2:#4A4335;--gold:#D9A441;--gold-hi:#F0C46A;--accent:var(--gold)}
 :root.lifeguard{--accent:#E5322D;--gold-hi:#FFD200}
 *{box-sizing:border-box}
@@ -47,8 +46,8 @@ header > *{pointer-events:auto}
 
 /* journey */
 main{position:relative;z-index:10}
-.stop{height:220vh;position:relative}
-.stop:last-child{height:150vh}
+.stop{height:170vh;position:relative}
+.stop:last-child{height:130vh}
 .sticky{position:sticky;top:0;height:100vh;height:100dvh;display:flex;align-items:center;padding:96px clamp(16px,5vw,64px) 96px;pointer-events:none}
 .card{container-type:inline-size;pointer-events:auto;width:min(460px,100%);max-width:460px;background:rgba(0,0,0,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;
@@ -63,7 +62,7 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
 .card p{margin:0;font-size:17px;line-height:1.6;color:var(--ink-2)}
 .card .lede{font-size:19px;color:var(--ink)}
 .card .short{font-size:17px;color:var(--ink)}
-@media (min-width:701px){.card .short{display:none}}
+@media (min-width:901px){.card .short{display:none}}
 .row{display:flex;flex-wrap:wrap;gap:10px;padding-top:4px}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
 .tags span{font-size:13px;padding:5px 11px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2)}
@@ -142,7 +141,7 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
 }
 
 /* countdown intro */
-.intro{position:fixed;inset:0;z-index:50;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;cursor:pointer;transition:opacity .7s ease}
+.intro{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.72);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;cursor:pointer;transition:opacity .35s ease}
 .intro.on{display:flex}
 .intro.out{opacity:0;pointer-events:none}
 .intro-n{font-size:min(38vw,260px);line-height:1;font-weight:900;font-stretch:125%;color:var(--accent);font-variant-numeric:tabular-nums}
@@ -163,7 +162,7 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
 <body>
 <!-- Hi, source reader. Hints: poke the logo five times. Old cheat codes work. Lifeguards have one word. Try launch() in the console. -->
 <canvas id="scene" aria-hidden="true"></canvas>
-<div class="intro on" id="intro" aria-hidden="true"><div class="intro-n" id="introN"></div><div class="intro-s">Launch sequence · tap to skip</div></div>
+<div class="intro on" id="intro" aria-hidden="true"><div class="intro-n" id="introN"></div><div class="intro-s">Launch sequence</div></div>
 <script>
   (function () { var el = document.getElementById('intro'), seen = false;
     try { seen = sessionStorage.getItem('mm-intro') === '1'; } catch (e) {}
@@ -193,7 +192,7 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
     <div class="sticky"><div class="card">
       <p class="kicker">T-minus 10</p>
       <h1>Mika<br>Moenchmeier</h1>
-      <p class="lede">I like building things that have to work first time. Scroll, and my rocket will show you around.</p>
+      <p class="lede">I build things end to end: CAD, electronics, code, and the test rig to prove it. Scroll, and my rocket will show you around.</p>
       <div class="row"><a class="pill" href="#contact" data-jump="5">Email me</a><a class="pill ghost" href="#about" data-jump="1">Start the tour</a></div>
     </div></div>
   </section>
@@ -202,9 +201,9 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
     <div class="sticky"><div class="card">
       <p class="kicker">Stop 01 · About</p>
       <h2>About</h2>
-      <p class="lede">I’m at home in both New Zealand and Germany, and I’ve always liked working out how things work and then building my own. When I’m not building something I’m usually at the beach: I’ve been a volunteer surf lifeguard for years and I race IRBs.</p>
+      <p class="lede">I’m at home in both New Zealand and Germany, and I’ve always liked working out how things work and then building my own. When I’m not building something I’m usually at the beach: I’ve been a volunteer surf lifeguard for years, and I race inflatable rescue boats.</p>
       <div class="extra">
-        <p>Since finishing school in 2025 I’ve been travelling and working my way through Asia and Europe. At school I played 1st XI hockey, sat on the school board as student representative, and received a Young Achievers Award.</p>
+        <p>Since finishing school in 2025 I’ve been travelling through Asia and Europe, working and volunteering along the way. At school I played first-team hockey, sat on the school board as student representative, and received my school’s Young Achievers Award.</p>
       </div>
       <button class="toggle" type="button" aria-expanded="false">More</button>
     </div></div>
@@ -220,11 +219,11 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
           <span class="zoom" aria-hidden="true">⤢</span>
         </button>
         <div class="split-text">
-          <p class="short">A model rocket that steers its own thrust to land upright. Designed, built and ground-tested; graded Excellence.</p>
+          <p class="short">A model rocket that steers its own thrust to land upright: a two-axis gimballed motor, a Teensy flight computer and live radio telemetry, designed, built and ground-tested.</p>
+          <a class="more pdf" href="/self-landing-rockets.pdf" target="_blank" rel="noopener">Read the project write-up (PDF)</a>
           <div class="extra">
             <p>Point the motor’s thrust while it fires, and the rocket can keep itself upright and land instead of falling. I designed and built it as my final-year school project in 2025, tested it on the ground, and it was graded Excellence. Visiting Rocket Lab in Auckland along the way didn’t hurt.</p>
-            <div class="tags"><span>Thrust vector control</span><span>Ground-tested</span><span>Graded Excellence</span></div>
-            <a class="more" href="/self-landing-rockets.pdf" target="_blank" rel="noopener">How it works (project write-up, PDF)</a>
+            <div class="tags"><span>Two-axis gimbal</span><span>Teensy 4.1</span><span>LoRa telemetry</span><span>Ground-tested</span></div>
           </div>
           <button class="toggle" type="button" aria-expanded="false">More</button>
         </div>
@@ -234,21 +233,26 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
 
   <section class="stop" id="server" data-label="Home server">
     <div class="sticky"><div class="card">
-      <p class="kicker">Stop 03 · <span id="uptime">Still running</span></p>
+      <p class="kicker">Stop 03 · Still running</p>
       <h2>Home server</h2>
       <p class="short">A small server at home that runs my smart home and files my paperwork automatically.</p>
       <div class="extra">
-        <p>It runs my smart home and my own cloud storage, so my files stay on hardware I control. The part I’m proudest of is the document pipeline: a letter gets scanned, read, tagged and filed into the right folder without me touching it.</p>
+        <p>Home Assistant runs the smart home and Nextcloud is my own cloud storage, so my files stay on hardware I control. The part I’m proudest of is the document pipeline: a letter gets scanned, Paperless-ngx reads it, an AI step tags and names it, and it lands in the right folder without me touching it.</p>
       </div>
       <button class="toggle" type="button" aria-expanded="false">More</button>
     </div></div>
   </section>
 
-  <section class="stop" id="cleanswap" data-label="CleanSwap">
+  <section class="stop" id="thissite" data-label="This site">
     <div class="sticky"><div class="card">
-      <p class="kicker">Stop 04 · On the drawing board</p>
-      <h2>CleanSwap</h2>
-      <p>Scan the back of a shampoo bottle, find out what’s actually in it. Mobile first, still being designed.</p>
+      <p class="kicker">Stop 04 · You’re looking at it</p>
+      <h2>This website</h2>
+      <p class="short">A rocket that flies you through my work, built with three.js and AI-assisted coding.</p>
+      <div class="extra">
+        <p>I designed the journey and directed every detail, and built it with AI-assisted coding: plain three.js with no framework, planets generated in code, New Zealand drawn from real coastline coordinates, and an Earth lit by where the sun actually is right now. It’s hosted on Cloudflare.</p>
+        <a class="more" href="https://github.com/mikamoenchmeier/mikamoenchmeier.github.io" target="_blank" rel="noopener">See the source on GitHub</a>
+      </div>
+      <button class="toggle" type="button" aria-expanded="false">More</button>
     </div></div>
   </section>
 
@@ -257,12 +261,14 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
       <p class="kicker">Touchdown · Germany</p>
       <p class="meta-time" id="detime"></p>
       <h2>Get in touch</h2>
+      <p>Working on something interesting, or just want to talk rockets? I’d like to hear from you.</p>
+      <noscript><p>Email: mika [at] moenchmeier [dot] de</p></noscript>
       <div class="mail"><a id="mailLink" href="#">email</a><button class="pill ghost" id="copy" type="button">Copy</button></div>
       <nav class="links" aria-label="Elsewhere">
-        <a href="https://github.com/mikamoenchmeier" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/mikamoenchmeier" rel="noopener">LinkedIn</a>
         <a href="https://www.instagram.com/mikamoenchmeier/" rel="noopener">Instagram</a>
         <a href="https://youtube.com/@mikamoenchmeier" rel="noopener">YouTube</a>
+        <a href="https://github.com/mikamoenchmeier" rel="noopener">GitHub</a>
       </nav>
       <div class="fine"><span>© <span id="year">2026</span> Mika Moenchmeier</span><button type="button" id="secrets">Psst.</button></div>
     </div></div>
@@ -274,7 +280,6 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
 (() => {
   /* ======= Settings ======= */
   const EMAIL = ['mika', 'moenchmeier.de'].join('@'); // assembled in the browser so simple spam scrapers don't find it
-  const SERVER_SINCE = null;          // e.g. '2025-03-01' shows a live "Up N days" counter
 
   const $ = s => document.querySelector(s);
   const root = document.documentElement;
@@ -290,7 +295,6 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
   }
   let tt; function toast(m, ms = 2600) { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('on'), ms); }
   $('#copy').addEventListener('click', async () => { try { await navigator.clipboard.writeText(EMAIL); toast('Copied. Talk soon.'); } catch { toast(EMAIL); } });
-  if (SERVER_SINCE) { const u = () => $('#uptime').textContent = 'Up ' + Math.floor((Date.now() - new Date(SERVER_SINCE)) / 864e5).toLocaleString() + ' days'; u(); setInterval(u, 6e4); }
 
   document.querySelectorAll('.toggle').forEach(b => b.addEventListener('click', () => {
     const c = b.closest('.card'), open = c.classList.toggle('open'); b.textContent = open ? 'Less' : 'More'; b.setAttribute('aria-expanded', open);
@@ -319,16 +323,17 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
     return;
   }
 
-  /* ---------- countdown intro (once per visit) ---------- */
-  (() => {
+  /* ---------- countdown intro (once per visit), started after the first frame is drawn ---------- */
+  const startIntro = () => {
     const box = $('#intro'); if (!box) return; const num = $('#introN');
     try { sessionStorage.setItem('mm-intro', '1'); } catch {}
-    const steps = ['3', '2', '1', 'Ignition']; let i = 0, done = false, tm;
-    const finish = () => { if (done) return; done = true; clearTimeout(tm); box.classList.add('out'); setTimeout(() => box.remove(), 800); };
-    const next = () => { if (i >= steps.length) return finish(); num.textContent = steps[i]; num.style.fontSize = steps[i].length > 1 ? 'min(14vw,110px)' : ''; num.classList.remove('tick'); void num.offsetWidth; num.classList.add('tick'); i++; tm = setTimeout(next, i === steps.length ? 700 : 650); };
+    const steps = ['3', '2', '1']; let i = 0, done = false, tm;
+    const finish = () => { if (done) return; done = true; clearTimeout(tm); box.classList.add('out'); setTimeout(() => box.remove(), 400); };
+    const next = () => { if (i >= steps.length) return finish(); num.textContent = steps[i]; num.style.fontSize = steps[i].length > 1 ? 'min(14vw,110px)' : ''; num.classList.remove('tick'); void num.offsetWidth; num.classList.add('tick'); i++; tm = setTimeout(next, 380); };
     box.addEventListener('click', finish); addEventListener('keydown', finish, { once: true });
+    ['wheel', 'touchmove', 'scroll'].forEach(ev => addEventListener(ev, finish, { once: true, passive: true }));
     next();
-  })();
+  };
 
   /* ---------- scroll position -> journey position k (0..N-1) ---------- */
   const stopY = () => stops.map(s => s.offsetTop + Math.max(0, (s.offsetHeight - innerHeight) * 0.5));
@@ -518,16 +523,16 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
     const l = label('03  SERVER', 'docker · paperless-ngx'); l.position.set(0, r + 4, 0); g.add(l);
     scene.add(g); P.push({ c: g.position, r, g, n: LAND }); }
 
-  // 4: CleanSwap: mint planet with bubbles
+  // 4: This site: mint planet ringed by little gold hexagons (the logo)
   const bubbles = new T.Group();
   { const r = 5, g = new T.Group(); g.position.copy(POS[4]); const body = new T.Mesh(new T.IcosahedronGeometry(r, 3), flat(0x5FB89A, { roughness: .6 })); g.add(body);
     spinners.push({ o: body, axis: LAND, s: -.1 });
-    const bm = new T.MeshStandardMaterial({ color: 0xffffff, emissive: 0x9FE8D0, emissiveIntensity: .35, transparent: true, opacity: .4, roughness: .1, metalness: .1 });
-    for (let i = 0; i < 16; i++) { const s = new T.Mesh(new T.SphereGeometry(.3 + Math.random() * .6, 14, 10), bm); const a = Math.random() * 6.28, e = (Math.random() - .5) * 2.2;
-      s.position.set(Math.cos(a) * 7.5, e * 3, Math.sin(a) * 7.5); bubbles.add(s); }
+    const hm = new T.MeshStandardMaterial({ color: 0xD9A441, metalness: .6, roughness: .35, flatShading: true });
+    for (let i = 0; i < 16; i++) { const s = new T.Mesh(new T.CylinderGeometry(.35 + Math.random() * .4, .35 + Math.random() * .4, .14, 6), hm); const a = i / 16 * Math.PI * 2 + Math.random() * .2, e = (Math.random() - .5) * 2.2;
+      s.position.set(Math.cos(a) * 7.5, e * 3, Math.sin(a) * 7.5); s.rotation.set(Math.random() * 3, Math.random() * 3, 0); bubbles.add(s); }
     g.add(bubbles); spinners.push({ o: bubbles, axis: new T.Vector3(0, 1, 0), s: -.15 });
     addPad(g, r, LAND); g.add(glowSphere(r, 0x8FF0CF));
-    const l = label('04  CLEANSWAP', 'on the drawing board'); l.position.set(0, r + 3.5, 0); g.add(l);
+    const l = label('04  THIS SITE', 'three.js · cloudflare'); l.position.set(0, r + 3.5, 0); g.add(l);
     scene.add(g); P.push({ c: g.position, r, g, n: LAND }); }
 
   // 5: Earth: real continents (1° land mask), lit by where the sun actually is right now,
@@ -807,7 +812,7 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
         else { sa.fallT = undefined; sa.v = 0; sa.a += (0 - sa.a) * (1 - Math.pow(.15, dt)); }
         sa.hinge.rotation.x = -sa.a; }); }
     surf.forEach(w => { const ph = (t * 1.1 - w.phase) % 3.6; w.mat.opacity = ph > 0 && ph < 1.4 ? Math.sin(ph / 1.4 * Math.PI) * .55 : 0; });
-    bubbles.children.forEach((b, i) => b.position.y += Math.sin(t * .8 + i) * dt * .4);
+    bubbles.children.forEach((b, i) => { b.position.y += Math.sin(t * .8 + i) * dt * .4; b.rotation.x += dt * .5; b.rotation.z += dt * .3; });
     blinkers.forEach((l, i) => l.visible = Math.sin(t * 3 + i * 1.7) > -.3);
     flags.forEach(f => { f.children[1].rotation.y = Math.sin(t * 4 + f.userData.wave) * .3; f.children[2].rotation.y = Math.sin(t * 4 + f.userData.wave + .5) * .3; });
     beacons.forEach(bc => bc.material.color.setHex(Math.sin(t * 3.2 + bc.userData.ph) > .2 ? 0xFF2A2A : 0x2A0606));
@@ -826,6 +831,7 @@ h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.05;font-weight:780;font
     requestAnimationFrame(frame);
   }
   frame();
+  requestAnimationFrame(() => requestAnimationFrame(startIntro));
 
   /* ======= EASTER EGGS ======= */
   // 1. Logo: one tap = back to the pad, five quick taps = barrel roll
