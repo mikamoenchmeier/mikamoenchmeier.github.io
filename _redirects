@@ -1,0 +1,14 @@
+# Short links: mikamoenchmeier.com/x and so on (302 = temporary, so they can change later)
+/x              https://x.com/mikamoenchmeier                    302
+/x.html         https://x.com/mikamoenchmeier                    302
+/discord        https://discord.com/users/907537674649358367     302
+/discord.html   https://discord.com/users/907537674649358367     302
+/github         https://github.com/mikamoenchmeier               302
+/GitHub         https://github.com/mikamoenchmeier               302
+/GitHub.html    https://github.com/mikamoenchmeier               302
+/instagram      https://www.instagram.com/mikamoenchmeier/       302
+/Instagram      https://www.instagram.com/mikamoenchmeier/       302
+/Instagram.html https://www.instagram.com/mikamoenchmeier/       302
+/youtube        https://youtube.com/@mikamoenchmeier             302
+/youtube.html   https://youtube.com/@mikamoenchmeier             302
+/linkedin       https://www.linkedin.com/in/mikamoenchmeier      302
