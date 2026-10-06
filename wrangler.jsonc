@@ -1,9 +1,24 @@
 {
   // Cloudflare Workers config: serves this folder as a static website.
-  "name": "mikamoenchmeier",
+  "name": "mikamoenchmeier-github-io",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./",
     "not_found_handling": "404-page"
+  },
+  // Lets Cloudflare build a preview of every branch before it's merged.
+  "previews": {},
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "invocation_logs": true,
+      "persist": true
+    },
+    "traces": {
+      "enabled": false,
+      "head_sampling_rate": 1,
+      "persist": true
+    }
   }
 }
