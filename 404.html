@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="robots" content="noindex">
+<title>Lost in orbit · Mika Moenchmeier</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpolygon points='20,2 37.3,12 37.3,32 20,42 2.7,32 2.7,12' fill='%23000' stroke='%23D9A441' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap">
+<style>
+:root{--ink:#EDE6D8;--ink-2:#D6CFC1;--muted:#A8A196;--line:#2A2519;--line-2:#4A4335;--gold:#D9A441;--gold-hi:#F0C46A}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%;background:#000;color:var(--ink);font-family:'Archivo','Helvetica Neue',Helvetica,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+#scene{position:fixed;inset:0;width:100%;height:100%;display:block}
+header{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:calc(14px + env(safe-area-inset-top,0px)) clamp(16px,4vw,48px) 14px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none;min-height:44px}
+.brand span{font-weight:700;font-size:17px;font-stretch:112%}
+
+.pill{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;background:var(--gold);color:#000;font-weight:650;font-size:16px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+.pill:hover{background:var(--gold-hi);color:#000}
+.pill.ghost{background:rgba(0,0,0,.4);color:var(--ink);border:1.5px solid var(--line-2);font-weight:500}
+.pill.ghost:hover{border-color:var(--gold)}
+:focus-visible{outline:3px solid var(--gold-hi);outline-offset:3px;border-radius:6px}
+main{position:relative;z-index:4;height:100%;display:flex;align-items:center;padding:96px clamp(16px,5vw,64px);pointer-events:none}
+.card{pointer-events:auto;width:min(460px,100%);container-type:inline-size;background:rgba(0,0,0,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;animation:in .8s .3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes in{from{opacity:0;transform:translateY(16px)}}
+.kicker{margin:0;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600}
+h1{margin:0;font-size:min(64px,13cqi);line-height:.95;font-weight:850;font-stretch:118%;color:var(--gold)}
+p{margin:0;font-size:17px;line-height:1.6;color:var(--ink-2)}
+.path{font-size:14px;color:var(--muted);word-break:break-all}
+.path code{font-family:inherit;color:var(--ink);background:#15120C;border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+.row{display:flex;flex-wrap:wrap;gap:10px;padding-top:4px}
+.hud{position:fixed;z-index:5;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));font-size:12px;letter-spacing:.08em;color:var(--muted);
+  background:rgba(0,0,0,.6);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.hud b{color:#E5322D;font-weight:600;animation:blink 1.2s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+.toast{position:fixed;left:50%;top:calc(80px + env(safe-area-inset-top,0px));transform:translate(-50%,-10px);opacity:0;z-index:9;pointer-events:none;
+  background:var(--ink);color:#000;font-weight:600;padding:12px 20px;border-radius:999px;font-size:15px;transition:opacity .3s,transform .3s;max-width:calc(100vw - 32px);text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (max-width:700px){
+  .brand span{display:none}
+  main{align-items:flex-end;padding:80px 14px calc(64px + env(safe-area-inset-bottom,0px))}
+  .card{padding:20px;gap:10px}
+}
+@media (prefers-reduced-motion:reduce){.card,.hud b{animation:none}}
+.flat body{background:radial-gradient(ellipse at 70% 0%,#1a1406,#000 60%)}
+</style>
+</head>
+<body>
+<canvas id="scene" aria-hidden="true"></canvas>
+<header>
+  <a class="brand" href="/" aria-label="Mika Moenchmeier, home">
+    <svg width="38" height="42" viewBox="0 0 40 44" fill="none" aria-hidden="true"><polygon points="20,2 37.3,12 37.3,32 20,42 2.7,32 2.7,12" stroke="#D9A441" stroke-width="2.5"></polygon><text class="m" x="20" y="28.5" text-anchor="middle" font-family="Archivo, Helvetica, sans-serif" font-weight="800" font-size="17" fill="#D9A441">M</text></svg>
+    <span>Mika Moenchmeier</span>
+  </a>
+</header>
+<main>
+  <div class="card">
+    <p class="kicker">Error 404 · Signal lost</p>
+    <h1>Lost in orbit</h1>
+    <p>This page drifted off its trajectory. My rocket is out here somewhere too, legs folded, wondering how it got here.</p>
+    <p class="path">Nothing found at <code id="path">/</code></p>
+    <div class="row"><a class="pill" href="/">Back to the launch pad</a><a class="pill ghost" href="/#contact">Get in touch</a></div>
+  </div>
+</main>
+<div class="hud" aria-hidden="true"><b>●</b> NO SIGNAL · <span id="tel">T+00:00:00</span></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  $('#path').textContent = decodeURIComponent(location.pathname) + location.search;
+  const t0 = Date.now();
+  setInterval(() => { const s = Math.floor((Date.now() - t0) / 1000); $('#tel').textContent = 'T+' + [s / 3600, s / 60 % 60, s % 60].map(v => String(Math.floor(v)).padStart(2, '0')).join(':'); }, 1000);
+  let tt; const toast = (m, ms = 2600) => { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('on'), ms); };
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let gl = false; try { const c = document.createElement('canvas'); gl = !!(c.getContext('webgl') || c.getContext('experimental-webgl')); } catch {}
+  if (!gl || !window.THREE) { document.documentElement.classList.add('flat'); $('#scene').remove(); return; }
+
+  const T = THREE, canvas = $('#scene');
+  const renderer = new T.WebGLRenderer({ canvas, antialias: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.setSize(innerWidth, innerHeight);
+  const scene = new T.Scene(), mobile = () => innerWidth < 700;
+  const camera = new T.PerspectiveCamera(mobile() ? 60 : 45, innerWidth / innerHeight, .1, 500); camera.position.set(0, 0, 18);
+  addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.fov = mobile() ? 60 : 45; camera.updateProjectionMatrix(); });
+  scene.add(new T.HemisphereLight(0xfff3dc, 0x1a1206, .5));
+  const sun = new T.DirectionalLight(0xffffff, 1.1); sun.position.set(20, 25, 20); scene.add(sun);
+  const rimL = new T.DirectionalLight(0xD9A441, .7); rimL.position.set(-25, -5, -10); scene.add(rimL);
+
+  // stars
+  const n = 2200, sp = new Float32Array(n * 3); for (let i = 0; i < n; i++) { sp[i*3] = (Math.random() - .5) * 300; sp[i*3+1] = (Math.random() - .5) * 200; sp[i*3+2] = -20 - Math.random() * 200; }
+  const sg = new T.BufferGeometry(); sg.setAttribute('position', new T.BufferAttribute(sp, 3));
+  const stars = new T.Points(sg, new T.PointsMaterial({ color: 0xEDE6D8, size: .5, transparent: true, opacity: .85 })); scene.add(stars);
+
+  const flat = c => new T.MeshStandardMaterial({ color: c, flatShading: true, roughness: .9 });
+  const hash = (x, y, z) => { const s = Math.sin(x * 12.9898 + y * 78.233 + z * 37.719) * 43758.5453; return s - Math.floor(s); };
+  function rocky(r, d, amp) { const g = new T.IcosahedronGeometry(r, d), p = g.attributes.position, v = new T.Vector3();
+    for (let i = 0; i < p.count; i++) { v.fromBufferAttribute(p, i); v.multiplyScalar(1 + amp * (hash(+v.x.toFixed(3), +v.y.toFixed(3), +v.z.toFixed(3)) - .5)); p.setXYZ(i, v.x, v.y, v.z); } g.computeVertexNormals(); return g; }
+
+  // distant planets: Earth far away (you're a long way from home), a small grey moon close by
+  const earth = new T.Mesh(new T.IcosahedronGeometry(6, 3), flat(0x1F5FA8)); earth.position.set(mobile() ? -8 : 26, mobile() ? 16 : -12, -90); scene.add(earth);
+  const land = new T.Mesh(rocky(6.05, 2, .35), new T.MeshStandardMaterial({ color: 0x3E7D3A, flatShading: true, transparent: true, opacity: .9 })); earth.add(land);
+  const moon = new T.Mesh(rocky(3.2, 2, .2), flat(0x8E8A80)); moon.position.set(mobile() ? 7 : 18, mobile() ? 13 : 10, -45); scene.add(moon);
+
+  // the rocket: same model as the home page, legs stowed, engine cold
+  const rocket = new T.Group();
+  const shell = new T.MeshStandardMaterial({ color: 0x1F1F23, roughness: .5, metalness: .3 });
+  const legMat = new T.MeshStandardMaterial({ color: 0x232328, roughness: .45, metalness: .35, flatShading: true });
+  const hubMat = new T.MeshStandardMaterial({ color: 0x18181B, roughness: .4, metalness: .45, flatShading: true });
+  const R = .5, BODY = 4, base = -2;
+  rocket.add(new T.Mesh(new T.CylinderGeometry(R, R, BODY, 32), shell));
+  const prof = []; for (let i = 0; i <= 26; i++) { const y = i / 26 * 1.5; prof.push(new T.Vector2(Math.max(.015, R * Math.pow(1 - Math.pow(y / 1.5, 2), .6)), y)); }
+  const nose = new T.Mesh(new T.LatheGeometry(prof, 32), shell); nose.position.y = 2; rocket.add(nose);
+  [-1, 0, 1, 2].forEach(y => { const j = new T.Mesh(new T.TorusGeometry(R + .004, .012, 6, 40), new T.MeshStandardMaterial({ color: 0x45454C })); j.rotation.x = Math.PI / 2; j.position.y = y; rocket.add(j); });
+  const hub = new T.Mesh(new T.CylinderGeometry(.4, .36, .45, 24), hubMat); hub.position.y = base - .22; rocket.add(hub);
+  const noz = new T.Mesh(new T.CylinderGeometry(.11, .17, .2, 16, 1, true), hubMat); noz.material.side = T.DoubleSide; noz.position.y = base - .6; rocket.add(noz);
+  const beam = (p1, p2, w, d) => { const len = p1.distanceTo(p2), m = new T.Mesh(new T.BoxGeometry(w, len, d), legMat);
+    m.position.copy(p1).add(p2).multiplyScalar(.5); m.quaternion.setFromUnitVectors(new T.Vector3(0, 1, 0), p2.clone().sub(p1).normalize()); return m; };
+  const F = new T.Vector3(0, -.72, 1.55), Lw = new T.Vector3(0, -.42, -.02), STOW = -(Math.PI / 2 + Math.atan2(-F.y, F.z)) + .06;
+  for (let i = 0; i < 4; i++) { const az = new T.Group(); az.rotation.y = i * Math.PI / 2 + Math.PI / 4; rocket.add(az);
+    const h = new T.Group(); h.position.set(0, base - .02, .42); az.add(h); const O = new T.Vector3();
+    h.add(beam(O, F, .07, .1), beam(Lw, F, .07, .1), beam(O.clone().lerp(F, .3), Lw.clone().lerp(F, .52), .05, .07), beam(O, Lw, .06, .1));
+    h.rotation.x = STOW; }
+  const holder = new T.Group(); holder.add(rocket); scene.add(holder);
+  const fill = new T.PointLight(0xFFE7C2, .7, 12); fill.position.set(-2, 2, 4); holder.add(fill);
+
+  // little RCS puffs: the rocket keeps trying to correct itself
+  const puffs = []; for (let i = 0; i < 24; i++) { const m = new T.Mesh(new T.IcosahedronGeometry(.12, 0), new T.MeshBasicMaterial({ color: 0xEDE6D8, transparent: true, opacity: 0, depthWrite: false })); m.visible = false; scene.add(m); puffs.push(m); }
+  let pi = 0; function rcs() { const at = new T.Vector3((Math.random() - .5) * .4, 1.2, .5); rocket.localToWorld(at); const dir = at.clone().sub(holder.position).normalize();
+    for (let j = 0; j < 6; j++) { const p = puffs[pi++ % puffs.length]; p.position.copy(at); p.userData = { v: dir.clone().multiplyScalar(1.5 + Math.random()).add(new T.Vector3(Math.random() - .5, Math.random() - .5, Math.random() - .5).multiplyScalar(.6)), life: 1 }; p.visible = true; p.scale.setScalar(1); } }
+
+  // drift + tumble; drag or swipe to spin it, mouse adds a little parallax
+  const spin = new T.Vector3(.12, .2, .07); let drag = null, mx = 0, my = 0;
+  addEventListener('pointermove', e => { mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5;
+    if (drag) { spin.y += (e.clientX - drag.x) * .004; spin.x += (e.clientY - drag.y) * .004; drag = { x: e.clientX, y: e.clientY }; } });
+  canvas.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY }; });
+  addEventListener('pointerup', () => { if (drag) { drag = null; if (spin.length() > 1.2) toast('Okay, now it’s really lost.'); } });
+  canvas.style.touchAction = 'none';
+
+  const clock = new T.Clock(); let nextRcs = 3;
+  (function frame() {
+    const dt = Math.min(clock.getDelta(), .05), t = clock.elapsedTime;
+    const baseX = mobile() ? 0 : 4.5, baseY = mobile() ? 3.2 : .5;
+    holder.position.set(baseX + Math.sin(t * .23) * (mobile() ? .5 : 1.2), baseY + Math.sin(t * .31 + 1) * .8, Math.sin(t * .17) * 1.5);
+    if (!reduced) { rocket.rotation.x += spin.x * dt; rocket.rotation.y += spin.y * dt; rocket.rotation.z += spin.z * dt; }
+    spin.x += (.12 - spin.x) * dt * .3; spin.y += (.2 - spin.y) * dt * .3; spin.z += (.07 - spin.z) * dt * .3;
+    if (t > nextRcs) { rcs(); nextRcs = t + 2.5 + Math.random() * 3; }
+    puffs.forEach(p => { if (!p.visible) return; p.userData.life -= dt * 1.4; if (p.userData.life <= 0) { p.visible = false; return; }
+      p.position.addScaledVector(p.userData.v, dt); p.material.opacity = p.userData.life * .6; p.scale.multiplyScalar(1 + dt); });
+    earth.rotation.y += dt * .05; moon.rotation.y += dt * .03; stars.rotation.z += dt * .002;
+    camera.position.x += (mx * 1.5 - camera.position.x) * .04; camera.position.y += (-my * 1 - camera.position.y) * .04; camera.lookAt(mobile() ? 0 : 1.5, mobile() ? 1.5 : 0, 0);
+    renderer.render(scene, camera); requestAnimationFrame(frame);
+  })();
+  console.log('%c⬡ Houston, we have a 404.', 'color:#D9A441;font:700 18px Archivo,sans-serif');
+})();
+</script>
+</body>
+</html>
