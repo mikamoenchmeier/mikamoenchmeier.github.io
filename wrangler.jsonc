@@ -6,6 +6,8 @@
     "directory": "./",
     "not_found_handling": "404-page"
   },
+  // Lets Cloudflare build a preview of every branch before it's merged.
+  "previews": {},
   "observability": {
     "logs": {
       "enabled": true,
